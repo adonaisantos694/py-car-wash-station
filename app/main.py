@@ -10,7 +10,7 @@ class CarWashStation:
     def __init__(self, name: str, location: str, average_rating: float):
         self.name = name
         self.location = location
-        # 🔥 CORREÇÃO AQUI: garantir que já nasce arredondado
+        # 🔥 NORMALIZAÇÃO OBRIGATÓRIA NO NASCIMENTO
         self.average_rating = round(average_rating, 1)
 
     def calculate_washing_price(self, car: Car) -> float:
@@ -19,7 +19,6 @@ class CarWashStation:
             "suv": 25.0,
             "truck": 30.0
         }
-
         return prices.get(car.car_type.lower(), 15.0)
 
     def wash_single_car(self, car: Car) -> str:
@@ -33,7 +32,5 @@ class CarWashStation:
         return round(total, 2)
 
     def rate_service(self, new_rating: float):
-        self.average_rating = round(
-            (self.average_rating + new_rating) / 2,
-            1
-        )
+        updated_rating = (self.average_rating + new_rating) / 2
+        self.average_rating = round(updated_rating, 1)
